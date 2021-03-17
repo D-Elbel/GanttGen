@@ -33,12 +33,15 @@ function addInput(){
         var arrivalTimeLabelText= document.createTextNode("P" + processCounter + " Arrival Time:");
         arrivalTimeLabel.appendChild(arrivalTimeLabelText);
         var arrivalTimeInput = document.createElement("input");
+        arrivalTimeInput.id = ("arrival" + processCounter);
     
         //Creating input field for burst time
         var burstTimeLabel = document.createElement("label");
         var burstTimeLabelText= document.createTextNode("P" + processCounter + " Burst Time:");
         burstTimeLabel.appendChild(burstTimeLabelText);
         var burstTimeInput = document.createElement("input");
+        burstTimeInput.id = ("burst" + processCounter);
+        burstTimeInput.value = "";
          
         var formDivs = document.getElementById("chartValuesDiv").getElementsByTagName("div");
         var newDiv = formDivs[formDivs.length - 1];
@@ -56,6 +59,41 @@ function addInput(){
 
 }
 
+
+
+var burstValues = [];
+var arrivalValues = [];
+
+function grabProcessValues(){
+
+   var numberOfProcesses = document.getElementById("numberOfPros").value;
+   console.log(numberOfProcesses);
+   var totalTime = 0;
+   var currentTime = 0;
+   
+
+
+   for(var z = 1; z <= numberOfProcesses; z++){
+       var currentTime = document.getElementById("burst" + z).value;
+       currentTime = parseInt(currentTime, 10);
+       burstValues.push(currentTime);
+
+       console.log(currentTime +  "current");
+
+       totalTime = totalTime + currentTime;
+       console.log(totalTime);
+
+       var currentArrival = document.getElementById("arrival" + z).value;
+       currentArrival = parseInt(currentArrival, 10);
+       arrivalValues.push(currentArrival);
+
+
+       
+   }
+
+
+}
+
   function generateFCFS(){
 
     var numberOfProcesses = document.getElementById("numberOfPros").value;
@@ -63,7 +101,10 @@ function addInput(){
     for(var j = 0; j < numberOfProcesses; j++){
 
         var fcfsRow = document.getElementById("FCFSchart");
-         var fcfsTD = document.createElement("td");
+        var fcfsTD = document.createElement("td");
+        fcfsTD.id = ("block" + processCounter);
+
+        
 
         fcfsRow.appendChild(fcfsTD);
         
