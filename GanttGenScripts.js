@@ -8,11 +8,6 @@ function saveImg(){
 var processCounter = 1;
 var numberOfProcesses;
 
-//function getNumberOfInputs(){
-//    var numberOfProcesses = document.getElementById("numberOfPros").value;
-//    console.log(numberOfProcesses + " processes");
-//}
-
 function addInput(){
 
     var numberOfProcesses = document.getElementById("numberOfPros").value;
@@ -26,6 +21,7 @@ function addInput(){
         //Appending the new DIV to parent DIV
         var element = document.getElementById("chartValuesDiv");
         element.appendChild(inputDiv);
+        inputDiv.className = "processInputs";
       
        
         //Creating input field for arrival time
@@ -34,6 +30,7 @@ function addInput(){
         arrivalTimeLabel.appendChild(arrivalTimeLabelText);
         var arrivalTimeInput = document.createElement("input");
         arrivalTimeInput.id = ("arrival" + processCounter);
+         
     
         //Creating input field for burst time
         var burstTimeLabel = document.createElement("label");
@@ -73,6 +70,7 @@ function grabProcessValues(){
    
    var currentTime = 0;
    
+   
 
 
    for(var z = 1; z <= numberOfProcesses; z++){
@@ -89,18 +87,28 @@ function grabProcessValues(){
        currentArrival = parseInt(currentArrival, 10);
        arrivalValues.push(currentArrival);
 
-
        
-   }
+    }
 
+    
+    
 
 }
 
-var totalBurstTime = 0;
 
-for(var l = 0; l <= burstValues.length; l++){
-    totalBurstTime = totalBurstTime + burstValues[l];    
-}
+
+
+/*for(var l = 0; l <= burstValues.length; l++){
+    totalBurstTime = totalBurstTime + burstValues[l];
+    
+    
+}*/
+
+
+
+
+
+
 
 //Setting the width of <td>s based on percentage of total time
 function setBlockWidths(){
@@ -109,6 +117,7 @@ function setBlockWidths(){
     var currentBlock;
 
     var chartTime = 0;
+    var avgWait = 0;
 
     for(var x = 0; x < numberOfProcesses; x++){
 
@@ -116,11 +125,14 @@ function setBlockWidths(){
         currentBlock = document.getElementById("block" + (x + 1)).style.width = (burstValues[x] / totalTime * 100) + "%";
         currentBlock = document.getElementById("block" + (x + 1)).style.backgroundColor = "rgb(209, 209, 209)";
 
-        var pBlockLabel= document.createTextNode("P" + (x + 1) + " " + chartTime + " to " + (chartTime + burstValues[x]));
+        var pBlockLabel= document.createTextNode("P" + (x + 1) + " " + chartTime + " to " + (chartTime + burstValues[x]) + " Wait Time:" + chartTime);
         document.getElementById("block" + (x + 1)).appendChild(pBlockLabel);
         chartTime = chartTime + burstValues[x];
+
+        avgWait = avgWait + burstValues[x];
     }
 
+    
 }
 
 //Creating the <td>s inside the existing <tr>
