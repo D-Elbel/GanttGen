@@ -80,10 +80,10 @@ function grabProcessValues(){
        currentTime = parseInt(currentTime, 10);
        burstValues.push(currentTime);
 
-       console.log(currentTime +  "current");
+      
 
        totalTime = totalTime + currentTime;
-       console.log(totalTime);
+      
 
        var currentArrival = document.getElementById("arrival" + z).value;
        currentArrival = parseInt(currentArrival, 10);
@@ -108,12 +108,17 @@ function setBlockWidths(){
     var numberOfProcesses = document.getElementById("numberOfPros").value;
     var currentBlock;
 
-    for(var x = 0; x < numberOfProcesses; x++){
-        currentBlock = document.getElementById("block" + (x + 1)).style.width = (burstValues[x] / totalTime * 100) + "%";
-        currentBlock = document.getElementById("block" + (x + 1)).style.backgroundColor = "blue";
+    var chartTime = 0;
 
-        var pBlockLabel= document.createTextNode("P" + (x + 1));
+    for(var x = 0; x < numberOfProcesses; x++){
+
+        
+        currentBlock = document.getElementById("block" + (x + 1)).style.width = (burstValues[x] / totalTime * 100) + "%";
+        currentBlock = document.getElementById("block" + (x + 1)).style.backgroundColor = "rgb(209, 209, 209)";
+
+        var pBlockLabel= document.createTextNode("P" + (x + 1) + " " + chartTime + " to " + (chartTime + burstValues[x]));
         document.getElementById("block" + (x + 1)).appendChild(pBlockLabel);
+        chartTime = chartTime + burstValues[x];
     }
 
 }
@@ -130,23 +135,14 @@ function setBlockWidths(){
         var fcfsTD = document.createElement("td");
         fcfsTD.id = ("block" + (j + 1));
 
-        
-
         fcfsRow.appendChild(fcfsTD);
-        
-        
-        } 
-
-    
-    var processBlocks = document.getElementById("FCFSchart").getElementsByTagName("td");
-
-    for(var k = 0; k < numberOfProcesses; k++){
-        var x = processBlocks[0].className = "testClass";
-    }
-
-    
-
-    
-   
+        }  
 
   }
+
+
+function generate(){
+    grabProcessValues();
+    generateFCFS();
+    setBlockWidths();
+}
