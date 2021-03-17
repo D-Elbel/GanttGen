@@ -54,8 +54,32 @@ function addInput(){
         processCounter++;
     }
 
+}
+
+  function generateFCFS(){
+
+    var numberOfProcesses = document.getElementById("numberOfPros").value;
+      
+    for(var j = 0; j < numberOfProcesses; j++){
+
+        var fcfsRow = document.getElementById("FCFSchart");
+         var fcfsTD = document.createElement("td");
+
+        fcfsRow.appendChild(fcfsTD);
+        
+        
+        } 
+
+    
+    var processBlocks = document.getElementById("FCFSchart").getElementsByTagName("td");
+
+    for(var k = 0; k < numberOfProcesses; k++){
+        var x = processBlocks[0].className = "testClass";
+    }
 
     
 
+    
    
+
   }
