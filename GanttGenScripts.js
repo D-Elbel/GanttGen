@@ -64,11 +64,13 @@ function addInput(){
 var burstValues = [];
 var arrivalValues = [];
 
+var totalTime = 0;
+
 function grabProcessValues(){
 
    var numberOfProcesses = document.getElementById("numberOfPros").value;
    console.log(numberOfProcesses);
-   var totalTime = 0;
+   
    var currentTime = 0;
    
 
@@ -94,6 +96,30 @@ function grabProcessValues(){
 
 }
 
+var totalBurstTime = 0;
+
+for(var l = 0; l <= burstValues.length; l++){
+    totalBurstTime = totalBurstTime + burstValues[l];    
+}
+
+//Setting the width of <td>s based on percentage of total time
+function setBlockWidths(){
+
+    var numberOfProcesses = document.getElementById("numberOfPros").value;
+    var currentBlock;
+
+    for(var x = 0; x < numberOfProcesses; x++){
+        currentBlock = document.getElementById("block" + (x + 1)).style.width = (burstValues[x] / totalTime * 100) + "%";
+        currentBlock = document.getElementById("block" + (x + 1)).style.backgroundColor = "blue";
+
+        var pBlockLabel= document.createTextNode("P" + (x + 1));
+        document.getElementById("block" + (x + 1)).appendChild(pBlockLabel);
+    }
+
+}
+
+//Creating the <td>s inside the existing <tr>
+
   function generateFCFS(){
 
     var numberOfProcesses = document.getElementById("numberOfPros").value;
@@ -102,7 +128,7 @@ function grabProcessValues(){
 
         var fcfsRow = document.getElementById("FCFSchart");
         var fcfsTD = document.createElement("td");
-        fcfsTD.id = ("block" + processCounter);
+        fcfsTD.id = ("block" + (j + 1));
 
         
 

@@ -25,7 +25,11 @@
 table{
     padding: 10px;
     background-color: lightcoral;
+    
    
+}
+td{
+    border:1px solid #fff;
 }
 
 #numberOfPros{
