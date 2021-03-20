@@ -109,9 +109,12 @@ function grabProcessValues(){
 
 
 
-
-
-
+var waitTimes = [];
+var turaroundTimes = [];
+var avgTurnaround = 0;
+var avgWait = 0;
+var totalWait = 0;
+var totalTurnaround = 0;
 //Setting the width of <td>s based on percentage of total time
 function setBlockWidths(){
 
@@ -119,8 +122,9 @@ function setBlockWidths(){
     var currentBlock;
 
     var chartTime = 0;
-    var avgWait = 0;
+    //var avgWait = 0;
     var currentExecTime =  0;
+    
 
     for(var x = 0; x < numberOfProcesses; x++){
 
@@ -131,12 +135,31 @@ function setBlockWidths(){
 
         var pBlockLabel= document.createTextNode("P" + (x + 1) + " " + chartTime + " to " + (chartTime + burstValues[x]) + " Wait Time:" + (chartTime - arrivalValues[x]));
         document.getElementById("block" + (x + 1)).appendChild(pBlockLabel);
+        waitTimes.push(chartTime - arrivalValues[x]);
+        
+        turaroundTimes.push(burstValues[x] + waitTimes[x]);
+        
+        
         chartTime = chartTime + burstValues[x];
 
-        avgWait = avgWait + burstValues[x];
+        
+        
     }
 
+    for(var p  = 0; p < waitTimes.length; p++){
+        totalWait = totalWait + waitTimes[p];
+        console.log("Total wait: " + totalWait + "Current Wait Time: " + waitTimes[p]);
+
+        totalTurnaround = totalTurnaround + turaroundTimes[p]; 
+        //console.log(totalWait);
+        }
     
+
+    avgWait = totalWait / waitTimes.length;
+    avgTurnaround = totalTurnaround / turaroundTimes.length;
+
+    document.getElementById("avgWait").innerHTML = ("Average wait time: " + avgWait.toFixed(2));
+    document.getElementById("avgTurnaround").innerHTML = ("Average turnaround time: " + avgTurnaround.toFixed(2));
 }
 
 //Creating the <td>s inside the existing <tr>
