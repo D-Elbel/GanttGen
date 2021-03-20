@@ -30,6 +30,7 @@ function addInput(){
         arrivalTimeLabel.appendChild(arrivalTimeLabelText);
         var arrivalTimeInput = document.createElement("input");
         arrivalTimeInput.id = ("arrival" + processCounter);
+        arrivalTimeInput.className = "timeInput";
          
     
         //Creating input field for burst time
@@ -39,7 +40,8 @@ function addInput(){
         var burstTimeInput = document.createElement("input");
         burstTimeInput.id = ("burst" + processCounter);
         burstTimeInput.value = "";
-         
+        burstTimeInput.className = "timeInput"; 
+
         var formDivs = document.getElementById("chartValuesDiv").getElementsByTagName("div");
         var newDiv = formDivs[formDivs.length - 1];
     
@@ -118,14 +120,16 @@ function setBlockWidths(){
 
     var chartTime = 0;
     var avgWait = 0;
+    var currentExecTime =  0;
 
     for(var x = 0; x < numberOfProcesses; x++){
 
         
+
         currentBlock = document.getElementById("block" + (x + 1)).style.width = (burstValues[x] / totalTime * 100) + "%";
         currentBlock = document.getElementById("block" + (x + 1)).style.backgroundColor = "rgb(209, 209, 209)";
 
-        var pBlockLabel= document.createTextNode("P" + (x + 1) + " " + chartTime + " to " + (chartTime + burstValues[x]) + " Wait Time:" + chartTime);
+        var pBlockLabel= document.createTextNode("P" + (x + 1) + " " + chartTime + " to " + (chartTime + burstValues[x]) + " Wait Time:" + (chartTime - arrivalValues[x]));
         document.getElementById("block" + (x + 1)).appendChild(pBlockLabel);
         chartTime = chartTime + burstValues[x];
 

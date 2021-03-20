@@ -24,13 +24,15 @@
 }
 
 table{
-    padding: 10px;
+    padding: 5px;
     background-color: lightcoral;
+    font-size:0.75em;
     
    
 }
 td{
     border:1px solid rgb(209, 209, 209);
+    padding:6px;
 }
 
 #numberOfPros{
@@ -40,11 +42,14 @@ td{
 
 #chartTable{
     width:100%;
+    
 }
 
 #FCFStable{
     text-align:center;
-    width:100%;
+    width:95%;
+    margin-left:auto;
+    margin-right: auto;
 }
 
 #chartInfoForm{
@@ -59,4 +64,16 @@ td{
 input{
     margin-left:5px;
     margin-right:5px;
+}
+
+.timeInput{
+    width:3em;
+}
+
+#chartValuesDiv{
+    margin:25px;
+}
+
+#genButtons{
+    margin:25px;
 }
