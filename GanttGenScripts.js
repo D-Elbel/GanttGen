@@ -5,6 +5,10 @@ function saveImg(){
    });
  };
 
+
+
+
+
 var processCounter = 1;
 var numberOfProcesses;
 
@@ -68,14 +72,12 @@ var totalTime = 0;
 function grabProcessValues(){
 
    var numberOfProcesses = document.getElementById("numberOfPros").value;
+   document.getElementById("numberOfPros").min = "0";
    console.log(numberOfProcesses);
    
    var currentTime = 0;
    
-   
-
-
-   for(var z = 1; z <= numberOfProcesses; z++){
+    for(var z = 1; z <= numberOfProcesses; z++){
        var currentTime = document.getElementById("burst" + z).value;
        currentTime = parseInt(currentTime, 10);
        burstValues.push(currentTime);
@@ -92,21 +94,11 @@ function grabProcessValues(){
        
     }
 
+   
     
     
 
 }
-
-
-
-
-/*for(var l = 0; l <= burstValues.length; l++){
-    totalBurstTime = totalBurstTime + burstValues[l];
-    
-    
-}*/
-
-
 
 
 var waitTimes = [];
@@ -180,8 +172,3 @@ function setBlockWidths(){
   }
 
 
-function generate(){
-    grabProcessValues();
-    generateFCFS();
-    setBlockWidths();
-}

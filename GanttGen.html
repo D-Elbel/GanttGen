@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="GanttGenCSS.css">
   <script src="GanttGenScripts.js"></script>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-  
+  <script src="SJFnonpre.js"></script>
+  <script src="algoSelector.js"></script>  
 </head>
 <body>
 
@@ -18,9 +19,13 @@
             <label>Please enter the number of processes:</label>
             <input id="numberOfPros" type="number">
 
+            <input type="radio" id="fcfs" name="algo" value="fcfs">
+            <label for="fcfs">FCFS</label>
+            <input type="radio" id="sjf" name="algo" value="sjf">
+            <label for="sjf">SJF</label>
          </form>
 
-         <button onclick="addInput()">Generate Inputs</button>
+         <button onclick="algoPick()">Generate Inputs</button>
 
     </div>
 
@@ -55,7 +60,7 @@
 
     <div id="genButtons">
 
-        <button onclick="generate()">Generate Chart</button>
+        <button onclick="chartGenerator()">Generate Chart</button>
     
     <button onclick="saveImg()">Save Chart</button>
 
